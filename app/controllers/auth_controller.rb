@@ -1,7 +1,5 @@
 class AuthController < ApplicationController
 
-  layout 'application'
-
   def login
     render :template => 'auth/login'
   end
