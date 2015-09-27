@@ -1,0 +1,21 @@
+<div id="skip-links">
+  <a href="#content">Skip to main content</a>
+  <a href="#footerLinks">Skip to footer links</a>
+</div>
+
+<div class="siteOuterWrapper">
+  <div class="siteInnerWrapper">
+
+    <div id="siteHeader" class="clearfix" role="banner">
+      <header>
+        <%= render :partial => '/home/header' %>
+        <%= render :partial => '/home/nav' %>
+      </header>
+    </div>
+    <div class="siteContentWrapper" role="main">
+      <%= yield %>
+      <%= render :partial => '/home/footer' %>
+    </div>
+
+  </div>
+</div>
