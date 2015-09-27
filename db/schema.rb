@@ -133,7 +133,6 @@ ActiveRecord::Schema.define(version: 20150927200828) do
   add_index "comfy_cms_snippets", ["site_id", "position"], name: "index_comfy_cms_snippets_on_site_id_and_position"
 
   create_table "contents", force: :cascade do |t|
-    t.string   "kind",       null: false
     t.text     "properties", null: false
     t.integer  "domain_id",  null: false
     t.datetime "created_at", null: false
