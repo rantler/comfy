@@ -41,17 +41,13 @@
               <div class="container">
                 <div class="wallpaper-content">
                   <% if @editing %>
-                    <%= form_for @content do |f| %>
-                      <%= f.hidden_field :kind %>
-                      <%= fields_for :properties, @content.accessible_properties do |p| %>
-                        <div><%= p.label :title %>: <%= p.text_field :title %></div>
-                        <div><%= p.label :sub_title %>: <%= p.text_field :sub_title %></div>
-                        <div><%= f.submit 'Save' %></div>
-                      <% end %>
+                    <%= fields_for :properties, @content.accessible_properties do |p| %>
+                      <div><%= p.label :title %>: <%= p.text_field :title %></div>
+                      <div><%= p.label :sub_title %>: <%= p.text_field :sub_title %></div>
                     <% end %>
                   <% else %>
-                    <h1><%= @banner.title %></h1>
-                    <p><%= @banner.sub_title %></p>
+                    <h1><%= @content.title %></h1>
+                    <p><%= @content.sub_title %></p>
                   <% end %>
                 </div>
               </div>
