@@ -40,8 +40,19 @@
             <div class="wallpaper-image" style="background-image: url(https://rally.demo.socrata.com/views/b2pj-jnbg/files/eQd4zkDBZ2qmacB1V5MFfqHoOtAsmXnAm2EJ9CAphgc);">
               <div class="container">
                 <div class="wallpaper-content">
-                  <h1>Welcome to Open Data Portal</h1>
-                  <p>Access to public information to facilitate transparency and knowledge</p>
+                  <% if @editing %>
+                    <%= form_for @content do |f| %>
+                      <%= f.hidden_field :kind %>
+                      <%= fields_for :properties, @content.accessible_properties do |p| %>
+                        <div><%= p.label :title %>: <%= p.text_field :title %></div>
+                        <div><%= p.label :sub_title %>: <%= p.text_field :sub_title %></div>
+                        <div><%= f.submit 'Save' %></div>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <h1><%= @banner.title %></h1>
+                    <p><%= @banner.sub_title %></p>
+                  <% end %>
                 </div>
               </div>
             </div>

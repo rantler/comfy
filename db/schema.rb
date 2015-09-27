@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150913201856) do
+ActiveRecord::Schema.define(version: 20150927200828) do
 
   create_table "comfy_cms_blocks", force: :cascade do |t|
     t.string   "identifier",                      null: false
@@ -131,5 +131,13 @@ ActiveRecord::Schema.define(version: 20150913201856) do
 
   add_index "comfy_cms_snippets", ["site_id", "identifier"], name: "index_comfy_cms_snippets_on_site_id_and_identifier", unique: true
   add_index "comfy_cms_snippets", ["site_id", "position"], name: "index_comfy_cms_snippets_on_site_id_and_position"
+
+  create_table "contents", force: :cascade do |t|
+    t.string   "kind",       null: false
+    t.text     "properties", null: false
+    t.integer  "domain_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

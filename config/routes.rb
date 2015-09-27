@@ -72,6 +72,8 @@ Rails.application.routes.draw do
     # comfy_route :cms, :path => '/', :sitemap => false
   # end
 
+  resources :contents
+
   root 'home#index'
 
 end
