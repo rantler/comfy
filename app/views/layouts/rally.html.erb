@@ -7,6 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="controller_custom_content action_custom_content_page locale_en home carousel-enabled">
+  <head>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+    <%= render :partial => '/home/head' %>
+  </head>
+  <body class="controller_custom_content action_custom_content_page locale_en home carousel-enabled">
 
   <div id="skip-links">
     <a href="#content">Skip to main content</a>
