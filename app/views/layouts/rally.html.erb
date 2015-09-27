@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rally</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="controller_custom_content action_custom_content_page locale_en home carousel-enabled">
+
+  <div id="skip-links">
+    <a href="#content">Skip to main content</a>
+    <a href="#footerLinks">Skip to footer links</a>
+  </div>
+
+  <div class="siteOuterWrapper">
+    <div class="siteInnerWrapper">
+      <div id="siteHeader" class="clearfix" role="banner">
+        <header>
+          <%= render :partial => '/home/header' %>
+          <%= render :partial => '/home/nav'  %>
+        </header>
+      </div>
+      <div class="siteContentWrapper" role="main">
+        <%= yield %>
+        <%= render :partial => '/home/footer' %>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
