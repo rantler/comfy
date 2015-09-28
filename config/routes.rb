@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  constraints DomainConstraint do
-    comfy_route :cms_admin, :path => '/admin'
-  end
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -64,13 +60,6 @@ Rails.application.routes.draw do
     # (app/controllers/internal/admin_controller.rb)
     resources :admin
   end
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-  # Make sure this routeset is defined last
-  # constraints DomainConstraint do
-    # comfy_route :cms, :path => '/', :sitemap => false
-  # end
 
   resources :contents
 

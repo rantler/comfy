@@ -4,21 +4,19 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :set_layout
-
-  def self.cms_domain?
-    DomainConstraint.matches?(OpenStruct.new(:domain => CurrentDomainMiddleware.current_domain))
-  end
+  before_filter :load_content
 
   private
 
   def set_layout
     if request.path !~ /admin/
-      if ApplicationController.cms_domain?
-        self.class.layout 'rally'
-      else
-        self.class.layout 'rally'
-      end
+      self.class.layout 'rally'
     end
+  end
+
+  def load_content
+    # TODO Replace this with finding the appropriate content record
+    @content = Content.last.accessible_properties
   end
 
 end
