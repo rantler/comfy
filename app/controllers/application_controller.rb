@@ -16,7 +16,10 @@ class ApplicationController < ActionController::Base
 
   def load_content
     # TODO Replace this with finding the appropriate content record
-    @content = Content.last.accessible_properties
+    unless @content
+      @content = Content.last
+      @content_properties = @content.accessible_properties
+    end
   end
 
 end
