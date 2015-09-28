@@ -1,10 +1,53 @@
 <nav class="nav-banner">
   <div class="container">
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/browse">Catalog</a></li>
-      <li><a href="https://rally.demo.socrata.com/videos">User’s Guide</a></li>
-      <li><a href="http://dev.socrata.com/">Developers</a></li>
-    </ul>
+    <% nav_links = Content.new.accessible_properties([
+        { :href => '/', :text => 'Home' },
+        { :href => '/browse', :text => 'Catalog' },
+        { :href => 'https://rally.demo.socrata.com/videos', :text => "Users's Guide" },
+        { :href => 'http://dev.socrata.com/', :text => 'Developers' }
+    ]) %>
+
+    <% if @editing %>
+      <div style="margin: 5px 0">
+        <a href="#" id="add_link">Add New Link</a>
+      </div>
+      <%= fields_for :properties, @content_properties do |p| %>
+        <% (@content_properties.nav_links || []).each_with_index do |link, index| %>
+          <fieldset name="nav_link" data-index="<%= "#{index}" %>">
+            <%== index > 0 ? '<br>' : '' %>
+            <%= p.label :href %>:
+            <%= text_field_tag 'properties[href][]', link.href, :id => nil %>
+            <%= p.label :text %>:
+            <%= text_field_tag 'properties[text][]', link.text, :id => nil %>
+            <a href="#" data-index="<%= index %>">Delete This Link</a>
+          </fieldset>
+        <% end %>
+      <% end %>
+    <% else %>
+      <ul class="nav-links">
+        <% @content_properties.nav_links.each do |link| %>
+          <li><a href="<%= link.href %>"><%= link.text %></a></li>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
 </nav>
+
+<script>
+// This JS is kind of lame. It's just here to demonstrate add/remove links
+  $('#add_link').on('click', function() {
+    var nav_links = $('fieldset[name=nav_link]');
+    var nav_link = nav_links.last().clone();
+    var new_index = nav_links.size() + 1;
+
+    nav_link.find('input').val('');
+
+    nav_link.find('*[data-index]').andSelf().attr('data-index', new_index);
+    nav_links.last().after(nav_link);
+  });
+
+  $('form').on('click', 'a[data-index]', function(event) {
+    var index = $(event.target).data('index');
+    $('fieldset[data-index=' + index + ']').remove();
+  });
+</script>
