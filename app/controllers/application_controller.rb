@@ -18,7 +18,9 @@ class ApplicationController < ActionController::Base
     # TODO Replace this with finding the appropriate content record
     unless @content
       @content = Content.last
-      @content_properties = @content.accessible_properties
+      if @content
+        @content_properties = @content.accessible_properties
+      end
     end
   end
 
